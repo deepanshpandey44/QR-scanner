@@ -5,8 +5,6 @@
  */
 
 import axios from 'axios';
-import './custom';
-
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

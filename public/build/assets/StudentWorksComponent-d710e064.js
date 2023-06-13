@@ -1,0 +1,1 @@
+import{a as t,F as e,j as r,b as a}from"./app-f45dd868.js";import{H as s}from"./UserendLayout-9b659bcf.js";function d(){return t(e,{children:r(s,{children:[t(a,{title:"Student Works"}),t(e,{})]})})}export{d as default};

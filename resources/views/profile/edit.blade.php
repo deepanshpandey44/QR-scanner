@@ -66,11 +66,12 @@
                             <div class="card">
                                 <h3 class="card-header text-center">Update User Profile</h3>
                                 <div class="card-body">
-                                    <form id="updateProfile" class="text-center" enctype="multipart/form-data" action="{{ route('profile-update',$user->id) }}" method="POST" >
+                                    <form id="updateprofile" class="text-center" enctype="multipart/form-data" method="POST" >
                                         @csrf
                                         <div>
-                                            <img src="{{ asset('storage/app/uploads/' . $user->profile_pic) }}" onerror="this.onerror=null; this.src='https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_1280.png'" class="mb-4 profile-pic">
+                                            <img id="profile_pic" src="{{ asset('storage/uploads/' . $user->profile_pic) }}" onerror="this.onerror=null; this.src='https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_1280.png'" class="mb-4 profile-pic">
                                         </div>
+                                        <input type="text" id="user_id" name="user_id" value="{{$user->id}}" class="d-none" required>
                                         <div class="form-group mb-3">
                                             <input type="text" placeholder="First Name" id="update_first_name" class="form-control" name="first_name" value="{{$user->first_name}}" required>
                                         </div>
@@ -96,5 +97,24 @@
                 </div>
             </main>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            const form = document.getElementById('updateprofile');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                // action="{{ route('profile-update',$user->id) }}"
+                const formData = new FormData(form);
+
+                axios.post('{{ route('profile-update') }}', formData)
+                    .then(response => {
+                        console.log(response.data);
+                        alert(response.data.message)
+                        document.getElementById("profile_pic").src = "{{ asset('storage/uploads/') }}" + "/" + response.data.profile_pic;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            });
+        </script>
     </body>
 </html>

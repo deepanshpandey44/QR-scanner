@@ -96,8 +96,10 @@ class UserAuthController extends Controller
         $user = User::where('id', $id)->first();
         return view('profile.edit', compact('user'));
     }
-    public function updateProfile(Request $request, $id)
+    public function updateProfile(Request $request)
     {
+        // dd($request->user_id);
+        $id = $request->user_id;
         $user = User::find($id);
         
         $first_name = $request->first_name;
@@ -108,8 +110,8 @@ class UserAuthController extends Controller
                 Storage::delete($user->profile_pic); 
             }
             $file = $request->file('profilepic');
-            $filename = $file->getClientOriginalName();
-            $path = $file->storeAs('uploads', $filename);
+            $filename = str_replace(' ', '', $file->getClientOriginalName());
+            $path = $file->storeAs('public/uploads', $filename);
             $user->profile_pic = $filename;
         }
         $user->first_name = $request->input('first_name');
@@ -117,6 +119,13 @@ class UserAuthController extends Controller
         
         $user->save();
         
-        return response()->json(['message' => 'Record updated successfully']);
+        return response()->json([
+            'message' => 'Record updated successfully',
+            'profile_pic' => $filename,
+        ]);
+    }
+    public function userListing(){
+        $users = User::all();
+        return view('allusers', compact('users'));
     }
 }

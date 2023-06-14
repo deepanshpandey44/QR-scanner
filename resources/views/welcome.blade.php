@@ -48,6 +48,12 @@
                 font-family: 'Playfair Diaply', serif;
                 font-weight: 700;
             }
+            .login-form .allusers{
+                text-align: right;
+            }
+            .login-form .allusers a{
+                text-decoration: none;
+            }
         </style>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js" integrity="sha512-k/KAe4Yff9EUdYI5/IAHlwUswqeipP+Cp5qnrsUjTPCgl51La2/JhyyjNciztD7mWNKLSXci48m7cctATKfLlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -58,6 +64,9 @@
             <main class="login-form">
                 <div class="container form-card">
                     <div class="row justify-content-center form-section">
+                        <div class="allusers">
+                            <a class="primary-button" href="/user-listing">All users</a>
+                        </div>
                         <div class="col-md-4" id="signup">
                             <div class="card">
                                 <h3 class="card-header text-center">Sign Up Form</h3>
@@ -140,7 +149,7 @@
                                     <div id="result"></div>
                                 </div>
                             </div>
-                      </div>
+                        </div>
                     </div>
                 </div>
             </main>
